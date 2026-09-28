@@ -1,0 +1,33 @@
+# Git Ignore for LeaveFlow
+
+# Java / Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.mvn/
+
+# Node / Vite / Frontend
+node_modules/
+dist/
+.output/
+.turbo/
+.npm/
+
+# IDE & OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Env
+.env
+.env.local
+.env.*.local

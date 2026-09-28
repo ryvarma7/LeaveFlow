@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:leaveflow_test;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+
+leave:
+  timezone: Asia/Kolkata
+  jwt:
+    secret: test-jwt-secret-key-that-is-at-least-32-bytes-long-for-tests
+    expiration-minutes: 60
+  coverage:
+    allowance-percent-of-daily-rate: 20
+    monthly-cap-days: 5
+  payroll:
+    scale: 2
+  escalation:
+    manager-timeout-seconds: 60
+    skip-level-timeout-seconds: 60
+    hr-timeout-seconds: 90
+    poll-interval-seconds: 5
+  internal:
+    cron-secret: test-cron-secret

@@ -1,0 +1,11 @@
+spring:
+  config:
+    activate:
+      on-profile: demo
+
+leave:
+  escalation:
+    manager-timeout-seconds: 60
+    skip-level-timeout-seconds: 60
+    hr-timeout-seconds: 90
+    poll-interval-seconds: 5
