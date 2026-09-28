@@ -77,13 +77,16 @@ public class DashboardController {
         Long coverageGaps = null;
 
         if ("MANAGER".equalsIgnoreCase(principal.getRole()) || "HR".equalsIgnoreCase(principal.getRole())) {
-            awaitingDecision = requestRepository.countAwaitingManagerDecision(employee.getId());
+            List<LeaveRequest> pendingForManager = requestRepository.findPendingForManager(employee.getId());
+            awaitingDecision = (long) pendingForManager.size();
             escalatedToManager = (long) requestRepository.findEscalatedForManager(employee.getId()).size();
             if (employee.getTeam() != null) {
                 teamSize = (long) employeeRepository.findByTeamIdAndActiveTrue(employee.getTeam().getId()).size();
                 teamOffToday = (long) requestRepository.findTeamMembersOnLeaveToday(employee.getTeam().getId(), today).size();
             }
-            coverageGaps = 0L; // proxy for gaps
+            coverageGaps = pendingForManager.stream()
+                .filter(r -> r.getCoverageStatus() == null || !"FULL".equalsIgnoreCase(r.getCoverageStatus()))
+                .count();
         }
 
         // HR metrics
