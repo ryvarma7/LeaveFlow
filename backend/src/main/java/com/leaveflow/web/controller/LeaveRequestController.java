@@ -396,9 +396,19 @@ public class LeaveRequestController {
 
     @GetMapping("/me/notifications")
     @Operation(summary = "Get notifications for current employee")
-    public List<Notification> getMyNotifications() {
+    public List<LeaveDto.NotificationResponse> getMyNotifications() {
         EmployeePrincipal principal = EmployeePrincipal.getCurrentUser();
-        return notificationService.getNotificationsForEmployee(principal.getId());
+        return notificationService.getNotificationsForEmployee(principal.getId()).stream()
+            .map(n -> new LeaveDto.NotificationResponse(
+                n.getId(),
+                n.getTitle(),
+                n.getMessage(),
+                n.getType(),
+                n.getReferenceId(),
+                n.isRead(),
+                n.getCreatedAt()
+            ))
+            .collect(Collectors.toList());
     }
 
     @PostMapping("/me/notifications/{id}/read")

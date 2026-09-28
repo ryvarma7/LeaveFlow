@@ -39,7 +39,7 @@ public interface LeaveRequestRepository extends JpaRepository<LeaveRequest, Long
     @Query("SELECT r FROM LeaveRequest r WHERE r.employee.manager.id = :managerId AND r.status IN ('APPROVED', 'REJECTED', 'CANCELLED') ORDER BY r.updatedAt DESC")
     List<LeaveRequest> findHistoryForManager(@Param("managerId") Long managerId);
 
-    @Query("SELECT r FROM LeaveRequest r WHERE r.status = 'PENDING_HR' AND r.escalationLevel = 0 ORDER BY r.createdAt ASC")
+    @Query("SELECT r FROM LeaveRequest r WHERE r.status = 'PENDING_HR' ORDER BY r.createdAt ASC")
     List<LeaveRequest> findPendingForHr();
 
     @Query("SELECT r FROM LeaveRequest r WHERE r.status = 'PENDING_HR' AND r.escalationLevel > 0 ORDER BY r.escalatedAt ASC")

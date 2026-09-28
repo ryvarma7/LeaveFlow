@@ -73,7 +73,7 @@ export default function HrDashboard() {
             <div className="px-5 py-4 border-b border-[#F2F4F7] flex items-center justify-between">
               <div>
                 <h2 className="text-sm font-semibold text-[#101828]">HR Approval Queue</h2>
-                <p className="text-xs text-[#667085] mt-0.5">Requests escalated for HR review</p>
+                <p className="text-xs text-[#667085] mt-0.5">Requests awaiting HR review</p>
               </div>
               <Link
                 to="/hr/queue"

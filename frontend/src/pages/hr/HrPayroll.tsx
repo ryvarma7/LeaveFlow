@@ -9,7 +9,7 @@ import type { PayrollStatement, Team } from '../../types/api';
 function monthOptions(): { value: string; label: string }[] {
   const opts = [];
   const now = new Date();
-  for (let i = 0; i < 12; i++) {
+  for (let i = -3; i <= 6; i++) {
     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
     const value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
     const label = d.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
@@ -28,7 +28,8 @@ function StatusPill({ status }: { status: 'CONFIRMED' | 'PROJECTED' }) {
 
 export default function HrPayroll() {
   const months = monthOptions();
-  const [selectedMonth, setSelectedMonth] = useState(months[0].value);
+  const currentMonthStr = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`;
+  const [selectedMonth, setSelectedMonth] = useState(currentMonthStr);
   const [teamFilter, setTeamFilter] = useState('');
 
   const { data: teams } = useQuery({

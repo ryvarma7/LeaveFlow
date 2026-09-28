@@ -136,4 +136,14 @@ public final class LeaveDto {
         BigDecimal used,
         BigDecimal available
     ) {}
+
+    public record NotificationResponse(
+        Long id,
+        String title,
+        String message,
+        String type,
+        Long referenceId,
+        boolean read,
+        Instant createdAt
+    ) {}
 }
